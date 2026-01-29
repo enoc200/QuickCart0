@@ -1,10 +1,27 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  createdAt: { type: Date, default: Date.now },
-});
+  id:{ 
+    type: String, required: true, unique: true 
+  },
+  name: { 
+    type: String, required: true 
+  },
+  email: {
+     type: String, required: true, unique: true
+     },
+   imageUrl:{ 
+    type: String,required:true 
+  },  
+  cartItems:{
+    type:Object,default:{}
+  }
+  
+},{minimize:false});
 
 // Prevent model overwrite error in Next.js hot reload
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
+
+export default User;
+
+
